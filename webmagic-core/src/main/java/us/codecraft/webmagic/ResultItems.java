@@ -29,6 +29,10 @@ public class ResultItems {
         return (T) fields.get(key);
     }
 
+    /**
+     * 将ResultItem中的Map类型的fields取出来
+     * @return
+     */
     public Map<String, Object> getAll() {
         return fields;
     }

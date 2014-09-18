@@ -118,6 +118,11 @@ public class UrlUtils {
         return stringBuilder.toString();
     }
 
+    /**
+     * 输入Collection类型 String返回一个Request的list
+     * @param urls
+     * @return
+     */
     public static List<Request> convertToRequests(Collection<String> urls) {
         List<Request> requestList = new ArrayList<Request>(urls.size());
         for (String url : urls) {

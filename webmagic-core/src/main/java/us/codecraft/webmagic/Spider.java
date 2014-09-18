@@ -82,6 +82,10 @@ public class Spider implements Runnable, Task {
 
     protected int threadNum = 1;
 
+    /**
+     * 使用java.util.concurrent.atomic.AtomicInteger来保证线程安全
+     * STAT_INIT 初始值为0
+     */
     protected AtomicInteger stat = new AtomicInteger(STAT_INIT);
 
     protected boolean exitWhenComplete = true;
@@ -404,6 +408,11 @@ public class Spider implements Runnable, Task {
         }
     }
 
+    /**
+     * 对request进行处理
+     * 使用download进行下载，存放到page中，并用pipeline处理page
+     * @param request
+     */
     protected void processRequest(Request request) {
         Page page = downloader.download(request, this);
         if (page == null) {
@@ -488,6 +497,7 @@ public class Spider implements Runnable, Task {
         destroyWhenExit = false;
         spawnUrl = false;
         startRequests.clear();
+        //将urls封装成Request，并push到scheduler中
         for (Request request : UrlUtils.convertToRequests(urls)) {
             addRequest(request);
         }
@@ -504,6 +514,7 @@ public class Spider implements Runnable, Task {
     }
 
     public <T> T get(String url) {
+    	//google的api，用 new ArrayList 完全一样
         List<String> urls = Lists.newArrayList(url);
         List<T> resultItemses = getAll(urls);
         if (resultItemses != null && resultItemses.size() > 0) {
@@ -570,7 +581,9 @@ public class Spider implements Runnable, Task {
      * @return this
      */
     public Spider thread(int threadNum) {
+    	//检查线程是否已经在运行
         checkIfRunning();
+        //对类中的threadNum进行设置
         this.threadNum = threadNum;
         if (threadNum <= 0) {
             throw new IllegalArgumentException("threadNum should be more than one!");
