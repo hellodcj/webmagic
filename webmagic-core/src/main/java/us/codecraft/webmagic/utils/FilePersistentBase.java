@@ -2,6 +2,8 @@ package us.codecraft.webmagic.utils;
 
 import java.io.File;
 
+import org.junit.Test;
+
 /**
  * Base object of file persistence.
  *
@@ -12,6 +14,9 @@ public class FilePersistentBase {
 
     protected String path;
 
+    /**
+     * 初始化，在windows中，分隔符为'\\'
+     */
     public static String PATH_SEPERATOR = "/";
 
     static {
@@ -21,6 +26,10 @@ public class FilePersistentBase {
         }
     }
 
+    /**
+     * 如果不是以分隔符结尾，则加一个分隔符
+     * @param path
+     */
     public void setPath(String path) {
         if (!path.endsWith(PATH_SEPERATOR)) {
             path += PATH_SEPERATOR;
@@ -28,11 +37,26 @@ public class FilePersistentBase {
         this.path = path;
     }
 
+    /**
+     * 通过地址，返回一个file
+     * @param fullName
+     * @return
+     */
     public File getFile(String fullName) {
         checkAndMakeParentDirecotry(fullName);
         return new File(fullName);
     }
+    
+    @Test
+    public void getFileTest(){
+    	File f = getFile("c:\\ss\\ss");
+    	System.out.println(f.getName());
+    }
 
+    /**
+     * 检查uri的目录是否已经存在，不存在就新建一个
+     * @param fullName
+     */
     public void checkAndMakeParentDirecotry(String fullName) {
         int index = fullName.lastIndexOf(PATH_SEPERATOR);
         if (index > 0) {

@@ -5,6 +5,8 @@ import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
+import us.codecraft.webmagic.selector.Html;
+import us.codecraft.webmagic.selector.Selectable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,11 @@ public class BaiduBaikePageProcessor implements PageProcessor {
 
     @Override
     public void process(Page page) {
+    	Html h = page.getHtml();
+    	Selectable s = h.css("h1.title div.lemmaTitleH1","text");
+    	Selectable s2 = h.xpath("//div[@id='lemmaContent-0']//div[@class='para']/allText()");
+    	String ss = s.toString();
+    	String ss2 = s2.toString();
         page.putField("name", page.getHtml().css("h1.title div.lemmaTitleH1","text").toString());
         page.putField("description", page.getHtml().xpath("//div[@id='lemmaContent-0']//div[@class='para']/allText()"));
     }
