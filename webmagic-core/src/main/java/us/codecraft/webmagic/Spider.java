@@ -83,7 +83,7 @@ public class Spider implements Runnable, Task {
     protected int threadNum = 1;
 
     /**
-     * 使用java.util.concurrent.atomic.AtomicInteger来保证线程安全
+     * 使用java.util.concurrent.atomic.AtomicInteger来保证线程安�?
      * STAT_INIT 初始值为0
      */
     protected AtomicInteger stat = new AtomicInteger(STAT_INIT);
@@ -304,7 +304,8 @@ public class Spider implements Runnable, Task {
         startTime = new Date();
     }
 
-    /**
+
+ /**
      * 主要其实就是调用了一个方法processRequest(requestFinal);
      */
     @Override
@@ -500,7 +501,7 @@ public class Spider implements Runnable, Task {
         destroyWhenExit = false;
         spawnUrl = false;
         startRequests.clear();
-        //将urls封装成Request，并push到scheduler中
+        //将urls封装成Request，并push到scheduler�?
         for (Request request : UrlUtils.convertToRequests(urls)) {
             addRequest(request);
         }
@@ -516,13 +517,8 @@ public class Spider implements Runnable, Task {
         return new ResultItemsCollectorPipeline();
     }
 
-    /**
-     * 下载一个url，实际上调用的是getAll()
-     * @param url
-     * @return resultItem
-     */
     public <T> T get(String url) {
-    	//google的api，用 new ArrayList 完全一样
+    	//google的api，用 new ArrayList 完全�?��
         List<String> urls = Lists.newArrayList(url);
         List<T> resultItemses = getAll(urls);
         if (resultItemses != null && resultItemses.size() > 0) {
@@ -589,7 +585,7 @@ public class Spider implements Runnable, Task {
      * @return this
      */
     public Spider thread(int threadNum) {
-    	//检查线程是否已经在运行
+    	//�?��线程是否已经在运�?
         checkIfRunning();
         //对类中的threadNum进行设置
         this.threadNum = threadNum;
