@@ -43,7 +43,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * Store results to files by FilePipeline: <br>
  * Spider.create(new SimplePageProcessor("http://my.oschina.net/",
  * "http://my.oschina.net/*blog/*")) <br>
- * .pipeline(new FilePipeline("/data/temp/webmagic/")).run(); <br>
+ * .addPipeline(new FilePipeline("/data/temp/webmagic/")).run(); <br>
  * <br>
  * Use FileCacheQueueScheduler to store urls and cursor in files, so that a
  * Spider can resume the status when shutdown. <br>
@@ -83,7 +83,7 @@ public class Spider implements Runnable, Task {
     protected int threadNum = 1;
 
     /**
-     * 使用java.util.concurrent.atomic.AtomicInteger来保证线程安�?
+     * 使用java.util.concurrent.atomic.AtomicInteger来保证线程安�?
      * STAT_INIT 初始值为0
      */
     protected AtomicInteger stat = new AtomicInteger(STAT_INIT);
@@ -501,7 +501,7 @@ public class Spider implements Runnable, Task {
         destroyWhenExit = false;
         spawnUrl = false;
         startRequests.clear();
-        //将urls封装成Request，并push到scheduler�?
+        //将urls封装成Request，并push到scheduler�?
         for (Request request : UrlUtils.convertToRequests(urls)) {
             addRequest(request);
         }
@@ -518,7 +518,7 @@ public class Spider implements Runnable, Task {
     }
 
     public <T> T get(String url) {
-    	//google的api，用 new ArrayList 完全�?��
+    	//google的api，用 new ArrayList 完全�?��
         List<String> urls = Lists.newArrayList(url);
         List<T> resultItemses = getAll(urls);
         if (resultItemses != null && resultItemses.size() > 0) {
@@ -585,7 +585,7 @@ public class Spider implements Runnable, Task {
      * @return this
      */
     public Spider thread(int threadNum) {
-    	//�?��线程是否已经在运�?
+    	//�?��线程是否已经在运�?
         checkIfRunning();
         //对类中的threadNum进行设置
         this.threadNum = threadNum;
