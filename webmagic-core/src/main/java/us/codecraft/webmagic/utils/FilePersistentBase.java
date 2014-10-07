@@ -6,7 +6,7 @@ import org.junit.Test;
 
 /**
  * Base object of file persistence.
- *
+ * 主要用于路径的处理
  * @author code4crafter@gmail.com <br>
  * @since 0.2.0
  */

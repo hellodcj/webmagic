@@ -31,6 +31,7 @@ public abstract class DuplicateRemovedScheduler implements Scheduler {
     @Override
     public void push(Request request, Task task) {
         logger.trace("get a candidate url {}", request.getUrl());
+        //判断是否是不重复的request，或者request出现问题，需要重置。
         if (!duplicatedRemover.isDuplicate(request, task) || shouldReserved(request)) {
             logger.debug("push to queue {}", request.getUrl());
             pushWhenNoDuplicate(request, task);

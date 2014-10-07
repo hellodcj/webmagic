@@ -48,6 +48,7 @@ public class FilePipeline extends FilePersistentBase implements Pipeline {
         	PrintWriter printWriter = new PrintWriter(getFile(path + DigestUtils.md5Hex(resultItems.getRequest().getUrl()) + ".html"), "UTF-8");
             printWriter.println("url:\t" + resultItems.getRequest().getUrl());
             for (Map.Entry<String, Object> entry : resultItems.getAll().entrySet()) {
+            	//如果value中是一个迭代器
                 if (entry.getValue() instanceof Iterable) {
                     Iterable value = (Iterable) entry.getValue();
                     printWriter.println(entry.getKey() + ":");

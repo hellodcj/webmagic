@@ -30,11 +30,13 @@ public class QueueScheduler extends DuplicateRemovedScheduler implements Monitor
         return queue.poll();
     }
 
+    //MonitorableScheduler中的方法
     @Override
     public int getLeftRequestsCount(Task task) {
         return queue.size();
     }
 
+    //MonitorableScheduler中的方法
     @Override
     public int getTotalRequestsCount(Task task) {
         return getDuplicateRemover().getTotalRequestsCount(task);
